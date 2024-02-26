@@ -54,6 +54,16 @@ pipeline {
                 """
             }
           }
+           stage('destroy') {
+            steps {
+                sh """
+                      cd terraform 
+                    terraform destroy -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
+
+                """
+            }
+          }
+
         
         }
     // post build 
